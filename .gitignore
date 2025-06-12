@@ -1,0 +1,16 @@
+
+# large data / artefacts
+data/
+work/
+submission/*.zip
+*.npz
+*.pt
+*.pth
+*.ckpt
+
+# python cache
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+venv/

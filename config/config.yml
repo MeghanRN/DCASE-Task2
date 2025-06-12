@@ -1,0 +1,45 @@
+
+# ------------------------------------------------------------------
+# Global configuration for BEATs-KNN ASD system
+# Put this file at:  config/config.yaml
+# ------------------------------------------------------------------
+
+# Paths (relative to project root)
+paths:
+  data_root:       data/dcase2025t2                 # original WAV hierarchy
+  dev_root:        ${paths.data_root}/dev_data/raw  # ← dev   WAVs
+  eval_root:       ${paths.data_root}/eval_data/raw # ← eval  WAVs
+  work_root:       work                             # embeddings, checkpoints
+  indices_dir:     ${paths.work_root}/indices       # *.npz reference sets
+  scores_dir:      ${paths.work_root}/scores        # *_scores.csv from inference
+  models_dir:      ${paths.work_root}/models        # optional fine-tuned *.pt
+  submission_dir:  submission                       # final ZIPs + meta
+
+# Audio parameters
+audio:
+  sample_rate:     16000        # BEATs default; leave as-is
+
+# Feature extractor (HuggingFace)
+model:
+  name:            facebook/beats-base  # allowed AudioSet-pretrained BEATs
+  emb_layer:       -1                   # which hidden state to mean-pool
+
+# K-NN detector
+detector:
+  k:               1        # nearest neighbours to average
+  metric:          cosine   # distance metric (cosine or euclidean)
+
+# Fine-tune settings (optional stage)
+train:
+  epochs:          3
+  lr:              1e-5
+  # unfreeze_pct:  10        # <- if you implement partial-layer unfreeze
+
+# Decision-threshold policy
+threshold:
+  method:          gamma        # gamma | percentile
+  percentile:      90           # used for both gamma-PPF or raw percentile
+
+# Misc / reproducibility
+seed:              42
+device:            auto         # auto | cpu | cuda | mps

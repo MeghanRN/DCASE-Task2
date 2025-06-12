@@ -1,0 +1,9 @@
+torch>=2.2
+torchaudio
+transformers>=4.39
+soundfile
+scikit-learn
+faiss-cpu          # use faiss-gpu if you have CUDA
+tqdm
+PyYAML
+ptflops            # optional: for MACs calculation
